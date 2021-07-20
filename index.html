@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="stylesheet" href="Styles/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <script src="app.js" defer></script>
+  
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+</head>
+<body>
+<!-- HEADER -->
+<!-- HEADER -->
+<!-- HEADER -->
+
+  <div class="container">
+    <div class="header">
+      <img src="images/logo.svg" alt="Logo">
+      <div class="score">
+        <div class="score-title">Score</div>
+        <div class="score-number">0</div>
+      </div>
+    </div>
+
+<!-- GAME -->
+<!-- GAME -->
+<!-- GAME -->
+
+    <section class="game">
+      <button class="choice-btn" data-choice="paper">
+        <div class="choice paper">
+          <img src="images/icon-paper.svg" alt="Paper">
+        </div>
+      </button>
+      <button class="choice-btn" data-choice="scissors">
+        <div class="choice scissors">
+          <img src="images/icon-scissors.svg" alt="Scissors">
+        </div>
+      </button>
+      <button class="choice-btn" data-choice="rock">
+        <div class="choice rock">
+          <img src="images/icon-rock.svg" alt="Rock">
+        </div>
+      </button>
+    </section>
+  </div>
+
+  <button class="rules-btn" tabindex="1">Rules</button>
+
+  <div class="modal display-none">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2 class="modal-heading">Rules</h2>
+        <button class="close-btn">
+          <img src="images/icon-close.svg" alt="Close">
+        </button>
+      </div>
+      <img src="images/image-rules.svg" class="rules-img" alt="Rules-Image">
+    </div>
+  </div>
+
+</body>
+</html>

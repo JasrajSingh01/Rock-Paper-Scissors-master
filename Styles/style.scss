@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap');
+
+// GLOBAL SECTION
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+// FONTS
+
+$barlow: 'Barlow Semi Condensed', sans-serif;
+
+// COLORS
+
+$Light-Text: #fff;
+$Scissors-1: hsl(39, 89%, 49%);
+$Scissors-2: hsl(40, 84%, 53%);
+$Paper-1: hsl(230, 89%, 62%);
+$Paper-2: hsl(230, 89%, 65%);
+$Rock-1: hsl(349, 71%, 52%);
+$Rock-2: hsl(349, 70%, 56%);
+$Lizard-1: hsl(261, 73%, 60%);
+$Lizard-2: hsl(261, 72%, 63%);
+$Cyan-1: hsl(189, 59%, 53%);
+$Cyan-2: hsl(189, 58%, 57%);
+$Dark-Text: hsl(229, 25%, 31%);
+$Score-Text: hsl(229, 64%, 46%);
+$Header-Outline: hsl(217, 16%, 45%);
+$Background-1: hsl(214, 47%, 23%);
+$Background-2: hsl(237, 49%, 15%);
+$shadow-light: #00000026;
+$shadow-med: #0000004d;
+
+body {
+    font-family: $barlow;
+    background-image: radial-gradient(at top, $Background-1, $Background-2);
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.container {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+// HEADER SECTION
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+    border: 3px solid $Header-Outline;
+    border-radius: 20px;
+    padding: 0 30px;
+
+    .score {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        border-radius: 10px;
+        width: 120px;
+        height: 80%;
+
+        .score-title {
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: $Score-Text;
+        }
+
+        .score-number {
+            font-size: 44px;
+            font-weight: 700;
+            color: $Dark-Text;
+        }
+    }
+}
+
+// GAME SECTION
+
+.game {
+    position: relative;
+    display: grid;
+    grid-template-columns: (repeat(2, 1fr));
+    grid-template-areas: 
+        "paper scissors"
+        "rock rock";
+    place-items: center;
+    height: 400px;
+    padding-top: 40px;
+
+    .choice-btn {
+        border: none;
+        outline: none;
+        background: none;
+        cursor: pointer;
+
+        .choice {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            background: #fff;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            box-shadow: inset 0 6px $shadow-med;
++
+            img {
+                transform: scale(1.2);
+            }
+        }
+
+        .choice::before, .choice::after{
+            content: '';
+            position: absolute;
+            left: -15%;
+            top: -15%;
+            width: 130%;
+            height: 130%;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .choice::after {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .choice-btn:focus .choice::after{
+            opacity: 1;
+            box-shadow: 0 0 0 20px #223351;
+            z-index: -2;
+        }
+        
+        .choice.paper::before {
+            background: linear-gradient(to bottom, $Paper-1, $Paper-2);
+            box-shadow: 0 6px $shadow-med, 0 6px $Paper-2;
+        }
+        .choice.scissors::before {
+            background: linear-gradient(to bottom, $Scissors-1, $Scissors-2);
+            box-shadow: 0 6px $shadow-med, 0 6px $Scissors-2;
+        }
+        .choice.rock::before {
+            background: linear-gradient(to bottom, $Rock-1, $Rock-2);
+            box-shadow: 0 6px $shadow-med, 0 6px $Rock-2;
+        }
+    }
+
+    .choice-btn[data-choice="paper"] {
+        grid-area: paper;
+    }
+    .choice-btn[data-choice="scissors"] {
+        grid-area: scissors;
+    }
+    .choice-btn[data-choice="rock"] {
+        grid-area: rock;
+    }
+}
+
+.game::before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 28%;
+    top: 30%;
+    background: url(../images/bg-triangle.svg) no-repeat;
+    z-index: -1;
+}
+
+.rules-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: none;
+    outline: none;
+    border: 1px solid $Header-Outline;
+    border-radius: 5px;
+    color: $Light-Text;
+    padding: 6px 25px;
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+.rules-btn:focus, .rules-btn:hover {
+    border: 2px solid $Header-Outline;
+}
+
+.modal {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    background: $shadow-med;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+
+
+    .modal-container {
+        background: #fff;
+        border-radius: 5px;
+    }
+
+    .modal-header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding: 20px 20px 10px;
+    }
+
+    .modal-heading {
+        font-size: 15px;
+        color: $Dark-Text;
+    }
+
+    .close-btn {
+        border: none;
+        outline: none;
+        background: none;
+        cursor: pointer;
+        margin-right: 40px;
+    }
+
+    .rules-img {
+        padding: 20px 30px;
+    }
+}
+
+.display-none{
+    display: none;
+}
+
