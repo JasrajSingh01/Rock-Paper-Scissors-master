@@ -2,6 +2,8 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -11,6 +13,7 @@ body {
   background-image: radial-gradient(at top, #1f3756, #141539);
   background-size: cover;
   min-height: 100vh;
+  color: #fff;
 }
 
 .container {
@@ -87,35 +90,6 @@ body {
   cursor: pointer;
 }
 
-.game .choice-btn .choice {
-  position: relative;
-  width: 130px;
-  height: 130px;
-  background: #fff;
-  border-radius: 50%;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-  -webkit-box-shadow: inset 0 6px #0000004d;
-          box-shadow: inset 0 6px #0000004d;
-}
-
-.game .choice-btn .choice + img {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
-.game .choice-btn .choice::before, .game .choice-btn .choice::after {
-  content: '';
-  position: absolute;
-  left: -15%;
-  top: -15%;
-  width: 130%;
-  height: 130%;
-  border-radius: 50%;
-  z-index: -1;
-}
-
 .game .choice-btn .choice::after {
   opacity: 0;
   -webkit-transition: opacity 0.4s ease;
@@ -169,6 +143,69 @@ body {
   grid-area: rock;
 }
 
+.choice {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  background: #fff;
+  border-radius: 50%;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -webkit-box-shadow: inset 0 6px #0000004d;
+          box-shadow: inset 0 6px #0000004d;
+}
+
+.choice img {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.choice::before, .choice::after {
+  content: '';
+  position: absolute;
+  left: -15%;
+  top: -15%;
+  width: 130%;
+  height: 130%;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.choice::after {
+  opacity: 0;
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
+}
+
+.choice-btn:focus .choice::after {
+  opacity: 1;
+  -webkit-box-shadow: 0 0 0 20px #223351;
+          box-shadow: 0 0 0 20px #223351;
+  z-index: -2;
+}
+
+.choice.paper::before {
+  background: -webkit-gradient(linear, left top, left bottom, from(#4865f4), to(#5671f5));
+  background: linear-gradient(to bottom, #4865f4, #5671f5);
+  -webkit-box-shadow: 0 6px #0000004d, 0 6px #5671f5;
+          box-shadow: 0 6px #0000004d, 0 6px #5671f5;
+}
+
+.choice.scissors::before {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ec9e0e), to(#eca922));
+  background: linear-gradient(to bottom, #ec9e0e, #eca922);
+  -webkit-box-shadow: 0 6px #0000004d, 0 6px #eca922;
+          box-shadow: 0 6px #0000004d, 0 6px #eca922;
+}
+
+.choice.rock::before {
+  background: -webkit-gradient(linear, left top, left bottom, from(#dc2e4e), to(#dd405d));
+  background: linear-gradient(to bottom, #dc2e4e, #dd405d);
+  -webkit-box-shadow: 0 6px #0000004d, 0 6px #dd405d;
+          box-shadow: 0 6px #0000004d, 0 6px #dd405d;
+}
+
 .game::before {
   content: '';
   position: absolute;
@@ -178,6 +215,123 @@ body {
   top: 30%;
   background: url(../images/bg-triangle.svg) no-repeat;
   z-index: -1;
+}
+
+.results {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+      grid-template-areas: "you-picked ai-picked" "you-title ai-title";
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.results-heading {
+  font-size: 15px;
+  letter-spacing: 3px;
+  padding: 80px 0;
+}
+
+.result {
+  min-width: 100px;
+  min-height: 100px;
+  background: #16213d;
+  border-radius: 50%;
+}
+
+.results-heading:first-of-type {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: you-title;
+}
+
+.results-heading:last-of-type {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: ai-title;
+}
+
+.results-heading:first-of-type {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: you-picked;
+}
+
+.results-heading:last-of-type {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: ai-picked;
+}
+
+.show-winner {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+      grid-template-areas: "you-picked ai-picked" "you-title ai-title";
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.winner .choice::after {
+  -webkit-box-shadow: 0 0 0 40px #293251, 0 0 0 80px #232c4b, 0 0 0 120px #1e2949;
+          box-shadow: 0 0 0 40px #293251, 0 0 0 80px #232c4b, 0 0 0 120px #1e2949;
+  -webkit-animation: winner 0.5s ease forwards;
+          animation: winner 0.5s ease forwards;
+}
+
+@-webkit-keyframes winner {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes winner {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.results-winner {
+  grid-area: results-winner;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.results-text {
+  font-size: 35px;
+  padding-bottom: 15px;
+}
+
+.play-again {
+  background: #fff;
+  outline: none;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: #3b4363;
+  padding: 6px 35px;
+  font-family: inherit;
+  text-transform: inherit;
+  font-size: 13px;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+
+.play-again:focus {
+  border: 2px solid #606e85;
 }
 
 .rules-btn {
@@ -208,13 +362,11 @@ body {
   width: 100%;
   top: 0;
   left: 0;
-  display: -ms-grid;
-  display: grid;
+  display: none;
   place-items: center;
   background: #0000004d;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
-  pointer-events: none;
+  -webkit-transition: display 0.3s ease-in-out;
+  transition: display 0.3s ease-in-out;
 }
 
 .modal .modal-container {
@@ -222,7 +374,7 @@ body {
   border-radius: 5px;
 }
 
-.modal .modal-header {
+.modal .modal-container .modal-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -233,17 +385,16 @@ body {
   padding: 20px 20px 10px;
 }
 
-.modal .modal-heading {
+.modal .modal-container .modal-heading {
   font-size: 15px;
   color: #3b4363;
 }
 
-.modal .close-btn {
+.modal .modal-container .close-btn {
   border: none;
   outline: none;
   background: none;
   cursor: pointer;
-  margin-right: 40px;
 }
 
 .modal .rules-img {
@@ -251,6 +402,10 @@ body {
 }
 
 .display-none {
+  display: none;
+}
+
+.hidden {
   display: none;
 }
 /*# sourceMappingURL=style.css.map */
